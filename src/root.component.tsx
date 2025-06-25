@@ -1,8 +1,15 @@
 import { useForm } from "react-hook-form";
 import LabelForm from "./components/labels/label-form";
 import TextboxInput from "./components/inputs/textbox-input";
+import SaveInput from "./components/inputs/save-input";
+import CancelInput from "./components/inputs/cancel-input";
+import IconEdit from "./assets/images/icon-edit.svg";
+import { useState } from "react";
+import CloseSessionInput from "./components/inputs/close-session-input";
+import DeleteAccountInput from "./components/inputs/delete-account-input";
 
 export default function Root(props) {
+  const [isEdit, setIsEdit] = useState<boolean>(false);
   const { register } = useForm({
     defaultValues: {
       registery: 1574896587,
@@ -15,19 +22,40 @@ export default function Root(props) {
     },
   });
 
+  const isEditState = () => {
+    if (isEdit) {
+      setIsEdit(false);
+    } else {
+      setIsEdit(true);
+    }
+  };
+
   return (
     <>
-      <form className="m-auto mt-10 w-10/12 max-w-[1280px] min-[290px]: h-9/12 max-h-[900px] rounded-xl shadow-lg shadow-[#00000040] py-6">
-        <div className="flex justify-center w-full pb-6">
-          <h1 className="text-grayDark font-bold text-2xl">Meus Dados</h1>
+      <form className="m-auto mt-10 w-11/12 max-w-[1280px] min-[290px]: h-9/12 max-h-[900px] rounded-3xl shadow-lg shadow-[#00000040] p-6">
+        <div className="flex w-full pb-6 last:justify-end">
+          <div className="flex-1 text-center">
+            <h1 className=" text-grayDark font-bold text-2xl">Meus Dados</h1>
+          </div>
+          {isEdit ? (
+            ""
+          ) : (
+            <button onClick={isEditState}>
+              <img
+                src={IconEdit}
+                alt="ìcone de editar"
+                className="w-6 cursor-pointer"
+              />
+            </button>
+          )}
         </div>
-        <div className="flex flex-col w-10/12 m-auto mb-4 gap-4">
+        <div className="flex flex-col w-full m-auto my-4 gap-4">
           <div>
             <LabelForm title="Nome Completo:" />
             <TextboxInput
               name="name"
               required={true}
-              readOnly={true}
+              readOnly={false}
               type="text"
               register={register}
             />
@@ -38,7 +66,7 @@ export default function Root(props) {
               name="registery"
               required={true}
               type="text"
-              readOnly={false}
+              readOnly={true}
               register={register}
             />
           </div>
@@ -94,6 +122,17 @@ export default function Root(props) {
             />
           </div>
         </div>
+        {isEdit ? (
+          <div className="flex w-full justify-end gap-2">
+            <CancelInput onClick={isEditState} />
+            <SaveInput />
+          </div>
+        ) : (
+          <div className="flex w-full justify-end gap-2">
+            <DeleteAccountInput />
+            <CloseSessionInput />
+          </div>
+        )}
       </form>
     </>
   );
