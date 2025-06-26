@@ -9,7 +9,7 @@ export default function TextboxInput({
     <input
       type={type}
       readOnly={readOnly}
-      className={`w-full border-b-[3px] border-b-blueMedium text-grayDark font-medium outline-none p-3 ${
+      className={`max-xl:w-full 2xl:min-w-[280px] border-b-[3px] border-b-blueMedium text-grayDark font-medium outline-none p-3 ${
         readOnly && "text-grayMedium"
       }`}
       {...(register ? register(name, { required }) : {})}

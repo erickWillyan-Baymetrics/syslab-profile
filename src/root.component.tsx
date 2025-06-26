@@ -12,13 +12,13 @@ export default function Root(props) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const { register } = useForm({
     defaultValues: {
-      registery: 1574896587,
-      name: "Erick Willyan dos Santos Cruz",
-      email: "erick.cruz@baymetrics.com.br",
+      registery: 1232025120,
+      name: "Antonio Manso Pacífico de Oliveira Sossegado",
+      email: "pacifico.sossegado@syslab.com",
       password: "123@123",
       type: "Aluno",
-      entry_time: "15:00",
-      departure_time: "21:00",
+      entry_time: "08:00",
+      departure_time: "16:00",
     },
   });
 
@@ -32,10 +32,12 @@ export default function Root(props) {
 
   return (
     <>
-      <form className="m-auto mt-10 w-11/12 max-w-[1280px] min-[290px]: h-9/12 max-h-[900px] rounded-3xl shadow-lg shadow-[#00000040] p-6">
+      <form className="m-auto mt-28 w-11/12 2xl:max-h-[750px] max-w-[1024px] min-[290px]: h-9/12 max-h-[900px] rounded-3xl shadow-lg shadow-[#00000040] 2xl:py-8 2xl:px-16 p-6">
         <div className="flex w-full pb-6 last:justify-end">
           <div className="flex-1 text-center">
-            <h1 className=" text-grayDark font-bold text-2xl">Meus Dados</h1>
+            <h1 className=" text-grayDark font-bold text-2xl select-none">
+              Meus Dados
+            </h1>
           </div>
           {isEdit ? (
             ""
@@ -49,18 +51,18 @@ export default function Root(props) {
             </button>
           )}
         </div>
-        <div className="flex flex-col w-full m-auto my-4 gap-4">
-          <div>
+        <div className="flex flex-col 2xl:content-between flex-wrap w-full 2xl:max-h-[400px] m-auto my-8 gap-4">
+          <div className="flex flex-col">
             <LabelForm title="Nome Completo:" />
             <TextboxInput
               name="name"
               required={true}
-              readOnly={false}
+              readOnly={true}
               type="text"
               register={register}
             />
           </div>
-          <div>
+          <div className="flex flex-col">
             <LabelForm title="Matrícula:" />
             <TextboxInput
               name="registery"
@@ -70,7 +72,7 @@ export default function Root(props) {
               register={register}
             />
           </div>
-          <div>
+          <div className="flex flex-col">
             <LabelForm title="E-mail:" />
             <TextboxInput
               name="email"
@@ -80,7 +82,7 @@ export default function Root(props) {
               register={register}
             />
           </div>
-          <div>
+          <div className="flex flex-col">
             <LabelForm title="Senha:" />
             <TextboxInput
               name="password"
@@ -91,7 +93,7 @@ export default function Root(props) {
             />
           </div>
 
-          <div>
+          <div className="flex flex-col">
             <LabelForm title="Ocupação:" />
             <TextboxInput
               name="type"
@@ -101,7 +103,7 @@ export default function Root(props) {
               register={register}
             />
           </div>
-          <div>
+          <div className="flex flex-col">
             <LabelForm title="Horário de Entrada:" />
             <TextboxInput
               name="entry_time"
@@ -111,7 +113,7 @@ export default function Root(props) {
               register={register}
             />
           </div>
-          <div>
+          <div className="flex flex-col">
             <LabelForm title="Horário de Saida:" />
             <TextboxInput
               name="departure_time"
