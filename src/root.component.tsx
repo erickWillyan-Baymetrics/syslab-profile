@@ -7,9 +7,14 @@ import IconEdit from "./assets/images/icon-edit.svg";
 import { useState } from "react";
 import CloseSessionInput from "./components/inputs/close-session-input";
 import DeleteAccountInput from "./components/inputs/delete-account-input";
+import CancelModal from "./components/modals/cancel-modal";
 
 export default function Root(props) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [showDeleteAccountModal, setShowDeleteAccountModal] =
+    useState<boolean>(false);
+  const [showCancelEditModal, setShowCancelEditModal] =
+    useState<boolean>(false);
   const { register } = useForm({
     defaultValues: {
       registery: 1232025120,
@@ -32,7 +37,7 @@ export default function Root(props) {
 
   return (
     <>
-      <form className="m-auto mt-28 w-11/12 2xl:max-h-[750px] max-w-[1024px] min-[290px]: h-9/12 max-h-[900px] rounded-3xl shadow-lg shadow-[#00000040] 2xl:py-8 2xl:px-16 p-6">
+      <form className="relative m-auto mt-28 w-11/12 2xl:max-h-[750px] max-w-[1024px] min-[290px]: h-9/12 max-h-[900px] rounded-3xl shadow-lg shadow-[#00000040] 2xl:py-8 2xl:px-16 p-6">
         <div className="flex w-full pb-6 last:justify-end">
           <div className="flex-1 text-center">
             <h1 className=" text-grayDark font-bold text-2xl select-none">
@@ -57,7 +62,7 @@ export default function Root(props) {
             <TextboxInput
               name="name"
               required={true}
-              readOnly={true}
+              readOnly={isEdit ? false : true}
               type="text"
               register={register}
             />
@@ -86,7 +91,7 @@ export default function Root(props) {
             <LabelForm title="Senha:" />
             <TextboxInput
               name="password"
-              readOnly={false}
+              readOnly={isEdit ? false : true}
               required={true}
               type="password"
               register={register}
@@ -109,7 +114,7 @@ export default function Root(props) {
               name="entry_time"
               required={true}
               type="text"
-              readOnly={false}
+              readOnly={isEdit ? false : true}
               register={register}
             />
           </div>
@@ -118,7 +123,7 @@ export default function Root(props) {
             <TextboxInput
               name="departure_time"
               required={true}
-              readOnly={false}
+              readOnly={isEdit ? false : true}
               type="text"
               register={register}
             />
@@ -126,15 +131,31 @@ export default function Root(props) {
         </div>
         {isEdit ? (
           <div className="flex w-full justify-end gap-2">
-            <CancelInput onClick={isEditState} />
+            <CancelInput onClick={() => setShowCancelEditModal(true)} />
             <SaveInput />
           </div>
         ) : (
           <div className="flex w-full justify-end gap-2">
-            <DeleteAccountInput />
+            <DeleteAccountInput
+              onClick={() => setShowDeleteAccountModal(true)}
+            />
             <CloseSessionInput />
           </div>
         )}
+        <CancelModal
+          isOpen={showDeleteAccountModal}
+          text="Atenção! Caso prossiga com esta ação você não poderá mais acessar esta conta."
+          textCancelButton="Excluir conta"
+          title="Tem certeza que deseja excluir a conta?"
+          onClickClose={() => setShowDeleteAccountModal(false)}
+        />
+        <CancelModal
+          isOpen={showCancelEditModal}
+          text="Você perderá todas as alterações não salvas."
+          textCancelButton="Cancelar"
+          title="Tem certeza que deseja cancelar?"
+          onClickClose={() => setShowCancelEditModal(false)}
+        />
       </form>
     </>
   );
