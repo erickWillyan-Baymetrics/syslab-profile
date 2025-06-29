@@ -15,7 +15,7 @@ export default function Root(props) {
     useState<boolean>(false);
   const [showCancelEditModal, setShowCancelEditModal] =
     useState<boolean>(false);
-  const { register } = useForm({
+  const { register, reset } = useForm({
     defaultValues: {
       registery: 1232025120,
       name: "Antonio Manso Pacífico de Oliveira Sossegado",
@@ -148,6 +148,10 @@ export default function Root(props) {
           textCancelButton="Excluir conta"
           title="Tem certeza que deseja excluir a conta?"
           onClickClose={() => setShowDeleteAccountModal(false)}
+          onClickAction={() => {
+            // console.log("Conta excluída com sucesso!");
+            setShowDeleteAccountModal(false);
+          }}
         />
         <CancelModal
           isOpen={showCancelEditModal}
@@ -155,6 +159,12 @@ export default function Root(props) {
           textCancelButton="Cancelar"
           title="Tem certeza que deseja cancelar?"
           onClickClose={() => setShowCancelEditModal(false)}
+          onClickAction={() => {
+            // console.log("Edição cancelada com sucesso!");
+            reset();
+            setIsEdit(false);
+            setShowCancelEditModal(false);
+          }}
         />
       </form>
     </>

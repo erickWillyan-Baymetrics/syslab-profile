@@ -6,6 +6,7 @@ export default function CancelModal({
   textCancelButton,
   isOpen,
   onClickClose,
+  onClickAction,
 }) {
   if (isOpen) {
     return (
@@ -19,7 +20,8 @@ export default function CancelModal({
           <div className="flex justify-around w-full ">
             <button
               type="button"
-              className="border-[3px] border-dangerPrimary w-36 rounded-full font-extrabold text-dangerPrimary"
+              className="border-[3px] border-dangerPrimary w-36 rounded-full font-extrabold text-dangerPrimary hover:bg-dangerPrimary hover:text-white delay-200 duration-200"
+              onClick={onClickAction}
             >
               {textCancelButton}
             </button>
