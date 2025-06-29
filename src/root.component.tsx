@@ -9,13 +9,23 @@ import CloseSessionInput from "./components/inputs/close-session-input";
 import DeleteAccountInput from "./components/inputs/delete-account-input";
 import CancelModal from "./components/modals/cancel-modal";
 
+interface FormValues {
+  email: string;
+  password: string;
+  registery: number;
+  name: string;
+  type: string;
+  entry_time: string;
+  departure_time: string;
+}
+
 export default function Root(props) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [showDeleteAccountModal, setShowDeleteAccountModal] =
     useState<boolean>(false);
   const [showCancelEditModal, setShowCancelEditModal] =
     useState<boolean>(false);
-  const { register, reset } = useForm({
+  const { register, reset } = useForm<FormValues>({
     defaultValues: {
       registery: 1232025120,
       name: "Antonio Manso Pacífico de Oliveira Sossegado",
